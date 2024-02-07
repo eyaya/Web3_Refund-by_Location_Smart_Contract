@@ -1,27 +1,24 @@
-// SPDX-License-Identifier: GPL-3.0
 pragma solidity 0.4.20;
-
 contract Casino {
    address public owner;
    uint256 public minimumBet;
    uint256 public totalBet;
    uint256 public numberOfBets;
    uint256 public maxAmountOfBets = 100;
-   address[] public players;   
-   struct Player {
+   address[] public players;   struct Player {
       uint256 amountBet;
       uint256 numberSelected;
    }   
+   
    // The address of the player and => the user info   
    mapping(address => Player) public playerInfo;   
    
    function() public payable {}   
    
-   
    function Casino(uint256 _minimumBet) public {
       owner = msg.sender;
       if(_minimumBet != 0 ) minimumBet = _minimumBet;
-   }
+   }   
    
    function kill() public {
       if(msg.sender == owner) selfdestruct(owner);
@@ -32,7 +29,7 @@ contract Casino {
          if(players[i] == player) return true;
       }
       return false;
-   }
+   }   
    
    // To bet for a number between 1 and 10 both inclusive
    function bet(uint256 numberSelected) public payable {
@@ -53,9 +50,9 @@ contract Casino {
    
    // Sends the corresponding ether to each winner depending on the total bets
    function distributePrizes(uint256 numberWinner) public {
-      address[100] memory winners;
-      // We have to create a temporary in memory array with fixed size
-      uint256 count = 0;
+      address[100] memory winners; // We have to create a temporary in memory array with fixed size
+      uint256 count = 0; 
+      
       // This is the count for the array of winners      
       for(uint256 i = 0; i < players.length; i++){
          address playerAddress = players[i];
@@ -64,14 +61,11 @@ contract Casino {
             count++;
          }
          delete playerInfo[playerAddress]; // Delete all the players
-      }      
-      players.length = 0;
-      // Delete all the players array      
-      uint256 winnerEtherAmount = totalBet / winners.length;
-      // How much each winner gets      
+      }      players.length = 0; // Delete all the players array      
+      
+      uint256 winnerEtherAmount = totalBet / winners.length; // How much each winner gets      
       for(uint256 j = 0; j < count; j++){
-         if(winners[j] != address(0))
-         // Check that the address in this fixed array is not empty
+         if(winners[j] != address(0)) // Check that the address in this fixed array is not empty
          winners[j].transfer(winnerEtherAmount);
       }
    }
