@@ -7,21 +7,17 @@
 const hre = require("hardhat");
 
 async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const unCasinoTime = currentTimestampInSeconds + 60;
+  const minimumBettingAmount = hre.ethers.parseEther("0.000001");
 
-  const CasinoedAmount = hre.ethers.parseEther("0.001");
-
-  const Casino = await hre.ethers.deployContract("Casino", [unCasinoTime], {
-    value: CasinoedAmount,
-  });
+  const Casino = await hre.ethers.deployContract("Casino", [minimumBettingAmount],
+  );
 
   await Casino.waitForDeployment();
 
   console.log(
-    `Casino with ${ethers.formatEther(
-      CasinoedAmount
-    )}ETH and unCasino timestamp ${unCasinoTime} deployed to ${Casino.target}`
+    `Casino with minumum bet amount ${ethers.formatEther(
+      minimumBettingAmount
+    )}ETH and deployed to ${Casino.target}`
   );
 }
 
