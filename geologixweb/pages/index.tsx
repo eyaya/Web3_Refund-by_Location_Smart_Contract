@@ -4,6 +4,16 @@ import { NextPage } from "next";
 import AddContact from "../components/add-contact";
 import ContactList from "../components/contact-list";
 
+import { Sepolia } from "@thirdweb-dev/chains";
+import { ThirdwebSDK } from "@thirdweb-dev/sdk";
+
+// If used on the FRONTEND pass your 'clientId'
+/*const sdk = new ThirdwebSDK(Sepolia, {
+  clientId: process.env.CLIENT_ID,
+});*/
+
+
+
 const Home: NextPage = () => {
   const address = useAddress();
 
