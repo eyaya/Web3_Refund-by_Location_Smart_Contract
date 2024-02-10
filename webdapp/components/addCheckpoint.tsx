@@ -63,7 +63,7 @@ export default function AddCheckpoint() {
                         <Web3Button
                             contractAddress={CONTRACT_ADDRESS}
                             action={(contract) => contract.call(
-                                "addCheckpoin",
+                                "addCheckpoint",
                                 [
                                     latitude,
                                     longitude,

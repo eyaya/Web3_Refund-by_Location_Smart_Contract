@@ -1,6 +1,8 @@
 import { useContract, useContractRead } from "@thirdweb-dev/react";
 import { CONTRACT_ADDRESS } from "../constants/address";
 import CheckpointCard from "./checkpointCard";
+import React, { useEffect } from "react";
+import { BigNumber,ethers } from "ethers";
 
 export default function CheckpointList() {
     const {
@@ -15,7 +17,6 @@ export default function CheckpointList() {
         "getsCheckpoints"
     );
     
-
     return (
         <div>
             {!isLoadingContacts ? (
@@ -24,10 +25,10 @@ export default function CheckpointList() {
                         <CheckpointCard
                             key={index}
                             index={index}
-                            latitude={checkpoint.latitude}
-                            longitude={checkpoint.longitude}
-                            diameter={checkpoint.diameter}
-                            timestamp={checkpoint.timestamp}
+                            latitude={ checkpoint.latitude*1e17}
+                            longitude={checkpoint.longitude*1e18}
+                            diameter={checkpoint.diameter*1e5}
+                            timestamp={checkpoint.timestamp*1}
                         />
                     ))
                 ) : (

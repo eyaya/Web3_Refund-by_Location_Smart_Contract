@@ -4,10 +4,10 @@ import { CONTRACT_ADDRESS } from '../constants/address';
 
 type Props = {
     index: number;
-    latitude: string;
-    longitude: string;
-    diameter: string;
-    timestamp: string;
+    latitude: number;
+    longitude: number;
+    diameter: number;
+    timestamp: number;
 };
 
 export default function CheckpointCard({ index, latitude, longitude, diameter, timestamp }: Props) {
@@ -15,7 +15,6 @@ export default function CheckpointCard({ index, latitude, longitude, diameter, t
         <div className={styles.contactCardContainer}>
             <div className={styles.contactCardInfo}>
                 <h2>{latitude}</h2>
-                <p>Wallet Address:</p>
                 <p>{longitude}</p>
                 <p>{diameter}</p>
                 <p>{timestamp}</p>
