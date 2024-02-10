@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "@thirdweb-dev/sdk": "^4.0.34",
-    "ethers": "^5.7.2"
+    "ethers": "^5.7.2",
+    "react-native": "^0.73.4"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-chai-matchers": "^2.0.4",
