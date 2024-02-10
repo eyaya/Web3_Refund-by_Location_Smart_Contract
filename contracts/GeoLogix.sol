@@ -8,7 +8,7 @@ contract GeoLogix
     enum StateType { Created, InTransit, Completed}
 
     StateType public  state;
-    address public  company; // aka owner
+    address public  company; 
     address public  device;
     address public  driver;
 
@@ -42,6 +42,10 @@ contract GeoLogix
     function addCheckpoint(int _lat, int _lng, uint _distance, uint _timestamp) public onlyOwner{
         Checkpoint memory checkpoint = Checkpoint(_lat, _lng,_distance, _timestamp);
         checkpoints.push(checkpoint);
+    }
+
+    function getsCheckpoints() public view returns (Checkpoint[] memory){
+        return checkpoints;
     }
  
 

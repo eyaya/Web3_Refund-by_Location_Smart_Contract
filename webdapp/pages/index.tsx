@@ -1,14 +1,28 @@
-import { ConnectWallet } from "@thirdweb-dev/react";
+import { ConnectWallet, useAddress } from "@thirdweb-dev/react";
 import styles from "../styles/Home.module.css";
-import Image from "next/image";
 import { NextPage } from "next";
+import AddCheckpoint from "../components/addCheckpoint";
+import CheckpointList from "../components/checkpointList";
+import { BaseSepoliaTestnet } from "@thirdweb-dev/chains";
+import { ThirdwebSDK } from "@thirdweb-dev/sdk";
+
+//import "../styles/globals.css";
+// If used on the FRONTEND pass your 'clientId'
+const sdk = new ThirdwebSDK(BaseSepoliaTestnet, {
+  clientId:"9c3cbec1384224d02fa21d82caa4d2ec",
+});
+
+
+const contract = sdk.getContract("0xdAaCC925B1257737925213aA42Ff89101Dd00867");
+
 
 const Home: NextPage = () => {
+  const address = useAddress();
   return (
     <main className={styles.main}>
       <div className={styles.container}>
         <div className={styles.header}>
-          <h1 className={styles.title}>
+          <h3 className={styles.title}>
             Welcome to{" "}
             <span className={styles.gradientText0}>
               <a
@@ -16,86 +30,26 @@ const Home: NextPage = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                thirdweb.
+                GeoLoxis Logistics and Delivery System.
               </a>
             </span>
-          </h1>
-
-          <p className={styles.description}>
-            Get started by configuring your desired network in{" "}
-            <code className={styles.code}>src/index.js</code>, then modify the{" "}
-            <code className={styles.code}>src/App.js</code> file!
-          </p>
-
-          <div className={styles.connect}>
-            <ConnectWallet />
+          </h3>
+        </div>
+      <div className={styles.addressContainer}>
+        <div className={styles.addressHeader}>
+          <h1>Checkpoints</h1>
+          <ConnectWallet />
+        </div>
+        {address && (
+          <div className={styles.addressListContainer}>
+            <div className={styles.addressListHeader}>
+              <h3>Checkpoints:</h3>
+              <AddCheckpoint />
+            </div>
+            <CheckpointList />
           </div>
-        </div>
-
-        <div className={styles.grid}>
-          <a
-            href="https://portal.thirdweb.com/"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              src="/images/portal-preview.png"
-              alt="Placeholder preview of starter"
-              width={300}
-              height={200}
-            />
-            <div className={styles.cardText}>
-              <h2 className={styles.gradientText1}>Portal ➜</h2>
-              <p>
-                Guides, references, and resources that will help you build with
-                thirdweb.
-              </p>
-            </div>
-          </a>
-
-          <a
-            href="https://thirdweb.com/dashboard"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              src="/images/dashboard-preview.png"
-              alt="Placeholder preview of starter"
-              width={300}
-              height={200}
-            />
-            <div className={styles.cardText}>
-              <h2 className={styles.gradientText2}>Dashboard ➜</h2>
-              <p>
-                Deploy, configure, and manage your smart contracts from the
-                dashboard.
-              </p>
-            </div>
-          </a>
-
-          <a
-            href="https://thirdweb.com/templates"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              src="/images/templates-preview.png"
-              alt="Placeholder preview of templates"
-              width={300}
-              height={200}
-            />
-            <div className={styles.cardText}>
-              <h2 className={styles.gradientText3}>Templates ➜</h2>
-              <p>
-                Discover and clone template projects showcasing thirdweb
-                features.
-              </p>
-            </div>
-          </a>
-        </div>
+        )}
+      </div>
       </div>
     </main>
   );
