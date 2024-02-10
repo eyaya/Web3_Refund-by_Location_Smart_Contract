@@ -25,9 +25,9 @@ export default function CheckpointList() {
                         <CheckpointCard
                             key={index}
                             index={index}
-                            latitude={ checkpoint.latitude*1e17}
-                            longitude={checkpoint.longitude*1e18}
-                            diameter={checkpoint.diameter*1e5}
+                            latitude={ checkpoint.latitude*1}
+                            longitude={checkpoint.longitude*1}
+                            diameter={checkpoint.diameter*1}
                             timestamp={checkpoint.timestamp*1}
                         />
                     ))

@@ -13,7 +13,7 @@ const sdk = new ThirdwebSDK(BaseSepoliaTestnet, {
 });
 
 
-const contract = sdk.getContract("0xdAaCC925B1257737925213aA42Ff89101Dd00867");
+const contract = sdk.getContract("0xc84409666CEE694Be2c61020B9A1562d7Cb4709e");
 
 
 const Home: NextPage = () => {

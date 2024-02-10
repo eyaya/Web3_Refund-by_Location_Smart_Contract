@@ -44,8 +44,16 @@ contract GeoLogix
         checkpoints.push(checkpoint);
     }
 
-    function getsCheckpoints() public view returns (Checkpoint[] memory){
-        return checkpoints;
+    function getsCheckpoints() public view returns (int, int, uint, uint, uint){
+        return (checkpoints[checkpoints.length - 1].lat, checkpoints[checkpoints.length - 1].lng, checkpoints[checkpoints.length - 1].distance, checkpoints[checkpoints.length - 1].timestamp, checkpoints.length);
+    }
+
+     function removeCheckpoint(uint _index) public onlyOwner{
+        require(_index < checkpoints.length, "index out of range");
+        for ( uint i=_index; i< checkpoints.length - 1; i++){
+            checkpoints[i] = checkpoints[i+1];
+        }
+        checkpoints.pop();
     }
  
 
